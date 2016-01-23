@@ -14,5 +14,5 @@
 
     <modules>
     <module>chat-common</module>
-</modules>
+    </modules>
 </project>
