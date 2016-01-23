@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     <name>Root of chat</name>
 
-<modules>
+    <modules>
     <module>chat-common</module>
 </modules>
 </project>
