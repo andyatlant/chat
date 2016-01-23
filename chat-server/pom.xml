@@ -12,6 +12,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>chat-server</artifactId>
     <packaging>jar</packaging>
-    <name>server class for chat</name>
+    <name>Server class for chat</name>
 
 </project>
