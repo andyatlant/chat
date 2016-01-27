@@ -14,4 +14,15 @@
     <packaging>jar</packaging>
     <name>Client class for chat</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.chat.skype</groupId>
+            <artifactId>chat-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
