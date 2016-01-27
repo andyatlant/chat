@@ -5,7 +5,6 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-
     <groupId>com.chat.skype</groupId>
     <artifactId>chat-root</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -13,6 +12,8 @@
     <name>Root of chat</name>
 
     <modules>
-    <module>chat-common</module>
+        <module>chat-common</module>
+        <module>chat-server</module>
+        <module>chat-client</module>
     </modules>
 </project>
