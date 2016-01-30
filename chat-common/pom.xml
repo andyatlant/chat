@@ -12,6 +12,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>chat-common</artifactId>
     <packaging>jar</packaging>
-    <name>Common class for chat</name>
+    <name>Common class 2 for chat</name>
 
 </project>
