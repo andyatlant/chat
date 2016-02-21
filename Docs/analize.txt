@@ -1,0 +1,18 @@
+entitis
+1.User (login, password, name, e-mail)
+2. Action Result (success -> boolean, reason -> String)
+
+services
+1. User DAO Service (SOA)
+    functions:
+   1.1
+2. Account Management Service
+2.1 User Registration Service,
+    use case:
+    2.1.1   register
+     description
+     input  parametres email, password, name, login
+     output Action Result
+     test cases
+2.2 Auth Service
+2.3 User Profile Service
