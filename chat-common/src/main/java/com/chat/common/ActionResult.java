@@ -30,4 +30,8 @@ public class ActionResult {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public boolean isNotSuccess() {
+        return !success;
+    }
 }

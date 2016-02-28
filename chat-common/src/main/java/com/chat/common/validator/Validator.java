@@ -1,4 +1,6 @@
-package com.chat.common;
+package com.chat.common.validator;
+
+import com.chat.common.ActionResult;
 
 /**
  *
