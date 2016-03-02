@@ -3,6 +3,7 @@ package com.chat.server.service.account.management.uc;
 import com.chat.common.ActionResult;
 import com.chat.common.dao.AccountDao;
 import com.chat.common.entity.Account;
+import com.chat.common.entity.AccountStatusEnum;
 import com.chat.server.service.account.management.AccountFieldsFormatValidator;
 import com.chat.server.service.account.management.AccountRegistrationInput;
 
@@ -29,13 +30,47 @@ public class UC_AccountRegistration extends AbstractAccountUC {
         if (result.isNotSuccess()) {
             return result;
         }
-        // 1.4 generate unique String CODE for user
-        // 1.5 create user object with temporary status, registration time and generated CODE
-        // 1.6 save user
+
+        // 1.4 create user object with temporary status, registration time and generated CODE
+        Account account = createAccount(input);
+
+        // 1.5 save user
+        ActionResult<Account> saveResult = saveAccount(account);
+        if (saveResult.isNotSuccess()) {
+            return saveResult;
+        }
+        account = saveResult.getOutputValue();
+
+        // 1.6 generate unique String CODE for user
+        ActionResult<String> codeResult = generateConfirmationCode(account);
+        if (codeResult.isNotSuccess()) {
+            return codeResult;
+        }
+        String confirmationCode = codeResult.getOutputValue();
         // 1.7 generate link to confirm user's e-mail with generated CODE
+
         // 1.8 send message to user's e-mail with generated link
 
         return null;
+    }
+
+    private ActionResult<String> generateConfirmationCode(Account account) {
+        return getConfirmationService().generateConfirmationCode(account.getId());
+    }
+
+    private ActionResult<Account> saveAccount(Account account) {
+        return getAccountDao().saveAccount(account);
+    }
+
+
+    private Account createAccount(AccountRegistrationInput input) {
+        Account account = new Account();
+        account.setEmail(input.getEmail());
+        account.setUserName(input.getUserName());
+        account.setLogin(input.getLogin());
+        account.setPassword(input.getPassword());
+        account.setStatus(AccountStatusEnum.NOT_CONFIRMED);
+        return account;
     }
 
     private ActionResult validate(AccountRegistrationInput input) {

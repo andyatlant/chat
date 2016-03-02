@@ -4,6 +4,8 @@ package com.chat.common.entity;
  *
  */
 public class Account extends AbstractId {
+
+    private AccountStatusEnum status;
     private String email;
     private String password;
     private String userName;
@@ -41,5 +43,11 @@ public class Account extends AbstractId {
         this.login = login;
     }
 
+    public AccountStatusEnum getStatus() {
+        return status;
+    }
 
+    public void setStatus(AccountStatusEnum status) {
+        this.status = status;
+    }
 }

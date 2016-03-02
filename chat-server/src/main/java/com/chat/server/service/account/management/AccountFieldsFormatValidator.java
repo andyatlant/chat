@@ -66,10 +66,7 @@ public class AccountFieldsFormatValidator {
                 actionResult.setSuccess(false);
                 actionResult.setMessage("Password must not be empty");
             } else {
-                if (password.matches(SPACE_PATTERN)) {
-                    actionResult.setSuccess(false);
-                    actionResult.setMessage("Password must not contain spaces");
-                } else if (password.length() < MIN_LENGTH) {
+                 if (password.length() < MIN_LENGTH) {
                     actionResult.setSuccess(false);
                     actionResult.setMessage("Password must contain more than " + MIN_LENGTH + " characters");
                 } else if (password.length() > MAX_LENGTH) {

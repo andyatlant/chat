@@ -6,6 +6,7 @@ import com.chat.common.entity.Account;
 import com.chat.server.service.account.management.AccountRegistrationInput;
 import org.junit.Assert;
 import org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -18,6 +19,7 @@ import static org.junit.Assert.*;
  *
  */
 public class UC_AccountRegistration_Test {
+
     @Test
     public void checkEmailExistingTest_emailExists() {
         // create account
@@ -46,6 +48,7 @@ public class UC_AccountRegistration_Test {
 
     }
 
+    @Test
     public void checkEmailExistingTest_emailNotExists() {
         // create account
         Account account = new Account();
@@ -63,17 +66,19 @@ public class UC_AccountRegistration_Test {
         // create account registration input
         AccountRegistrationInput accountInput = new AccountRegistrationInput();
         accountInput.setEmail("andyatlant@gmail.com");
-        accountInput.setLogin("andyatlant");
+        accountInput.setLogin("andyatlant2");
         accountInput.setPassword("Andyatlant123");
         accountInput.setUserName("Andrei");
 
         // checkEmailExisting
-        assertTrue(uc_accountRegistration.register(accountInput).isSuccess());
+        assertTrue("", uc_accountRegistration.register(accountInput).isSuccess());
         Assert.assertEquals(null, uc_accountRegistration.register(accountInput).getMessage());
     }
 
+    // TODO Fix test -> check email and login
+    // TODO Refactor remove duplicate
     @Test
-    public void checkLoginExistingTest_emailExists() {
+    public void checkLoginExistingTest_ifLoginExistsInDB() {
         // create account
         Account account = new Account();
         account.setEmail("andyatlant@gmail.com");
@@ -100,7 +105,8 @@ public class UC_AccountRegistration_Test {
 
     }
 
-    public void checkEmailLoginTest_emailNotExists() {
+    @Test
+    public void checkEmailLoginTest_ifLoginNotExistsInDB() {
         // create account
         Account account = new Account();
         account.setEmail("andyatlant@gmail.com");

@@ -32,7 +32,7 @@ public class AccountFieldsFormatValidator_PASSWORD_VALIDATOR_Test {
     * */
     @Test
     public void testValidateLessEight() {
-        ActionResult result = AccountFieldsFormatValidator.PASSWORD_VALIDATOR.validate("0124567");
+        ActionResult result = AccountFieldsFormatValidator.PASSWORD_VALIDATOR.validate("124567");
         assertFalse(result.isSuccess());
         assertEquals("Password must contain more than 8 characters", result.getMessage());
     }
