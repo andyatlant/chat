@@ -8,11 +8,14 @@ import static org.junit.Assert.*;
 
 public class AccountStatusEnumTest {
 
-    // TODO
-// I Don't understend
     @Test(expected = IllegalArgumentException.class)
     public void testGet_IllegalArgumentException() throws Exception {
-        assertEquals("", AccountStatusEnum.get("Hi"));
+        try {
+            AccountStatusEnum.get("Hi");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Unexpected value [Hi]. Available values:  NotConfirmed Confirmed Blocked ", e.getMessage());
+            throw e;
+        }
     }
 
     @Test

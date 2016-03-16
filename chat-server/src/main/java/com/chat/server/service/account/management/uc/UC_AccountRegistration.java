@@ -6,11 +6,15 @@ import com.chat.common.entity.Account;
 import com.chat.common.entity.AccountStatusEnum;
 import com.chat.server.service.account.management.AccountFieldsFormatValidator;
 import com.chat.server.service.account.management.AccountRegistrationInput;
+import com.chat.server.service.account.management.uc.account_sending_confirmation_request.UC_AccountSendingConfirmationRequest;
 
 /**
  *
  */
 public class UC_AccountRegistration extends AbstractAccountUC {
+
+    private UC_AccountSendingConfirmationRequest uc_accountSendingConfirmationRequest;
+
 
 
     public ActionResult register(AccountRegistrationInput input) {
@@ -40,23 +44,13 @@ public class UC_AccountRegistration extends AbstractAccountUC {
             return saveResult;
         }
         account = saveResult.getOutputValue();
-
-        // 1.6 generate unique String CODE for user
-        ActionResult<String> codeResult = generateConfirmationCode(account);
-        if (codeResult.isNotSuccess()) {
-            return codeResult;
+        ActionResult<String>sendConfirmationRequestResult =  uc_accountSendingConfirmationRequest.sendConfirmationRequest(account);
+        if (sendConfirmationRequestResult.isNotSuccess()) {
+            return sendConfirmationRequestResult;
         }
-        String confirmationCode = codeResult.getOutputValue();
-        // 1.7 generate link to confirm user's e-mail with generated CODE
-
-        // 1.8 send message to user's e-mail with generated link
-
-        return null;
+        return new ActionResult(true,null);
     }
 
-    private ActionResult<String> generateConfirmationCode(Account account) {
-        return getConfirmationService().generateConfirmationCode(account.getId());
-    }
 
     private ActionResult<Account> saveAccount(Account account) {
         return getAccountDao().saveAccount(account);
@@ -115,5 +109,9 @@ public class UC_AccountRegistration extends AbstractAccountUC {
             result.setMessage("User with login (" + login + ") already exists");
         }
         return result;
+    }
+
+    public void setUc_accountSendingConfirmationRequest(UC_AccountSendingConfirmationRequest uc_accountSendingConfirmationRequest) {
+        this.uc_accountSendingConfirmationRequest = uc_accountSendingConfirmationRequest;
     }
 }
